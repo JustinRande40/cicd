@@ -7,6 +7,8 @@ on:
         description: "Run tests?"
         default: false
         type: boolean
+  
+  pull_request:
 
 jobs:
   install:
@@ -28,5 +30,5 @@ jobs:
       run: npm run build
 
     - name: Test
-      if: ${{ inputs.run_tests }}
+      if: ${{ github.event_name = "pull_request" ||  inputs.run_tests }}
       run: npm test
